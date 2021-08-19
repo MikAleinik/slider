@@ -1,3 +1,5 @@
+let timerSlide = true;
+
 function scrollFoto(y, element) {
   var gallery = element.parentNode;
   var galleryWidth = gallery.clientWidth;
@@ -12,48 +14,60 @@ function scrollFoto(y, element) {
   var number;
 
   var filePath = './assets/jpg/Gallery/' + counter.previousElementSibling.value + "/";
-
-  if(y < 0){
-    //влево
-    counter.value++;
-    if((Number(counter.value) + 2) < Number(counter.max)){
-      number = Number(counter.value) + 2;
-    } else {
-      number = Number(counter.value) + 2 - Number(counter.max);
-      if(Number(counter.value) === Number(counter.max)){
-        counter.value = counter.min;
+  if (timerSlide) {
+    let timer = getComputedStyle(mainFoto).getPropertyValue("--foto__time-animation");
+    timerSlide = false;
+    setTimeout(endTransition, parseTime(timer) * 1000);
+    if (y < 0) {
+      //влево
+      counter.value++;
+      if ((Number(counter.value) + 2) < Number(counter.max)) {
+        number = Number(counter.value) + 2;
+      } else {
+        number = Number(counter.value) + 2 - Number(counter.max);
+        if (Number(counter.value) === Number(counter.max)) {
+          counter.value = counter.min;
+        }
       }
-    }
-    leftHiddenFoto.remove();
-    leftFoto.classList.remove('item__left-secondary-foto');
-    leftFoto.classList.add('item__left-hidden-foto');
-    mainFoto.classList.remove('item__main-foto');
-    mainFoto.classList.add('item__left-secondary-foto');
-    rightFoto.classList.remove('item__right-secondary-foto');
-    rightFoto.classList.add('item__main-foto');
-    rightHiddenFoto.classList.remove('item__right-hidden-foto');
-    rightHiddenFoto.classList.add('item__right-secondary-foto');
-    rightHiddenFoto.insertAdjacentHTML("afterend", "<img class='item__foto item__right-hidden-foto' src='" + filePath + number + ".jpg' alt='Foto'>");
-  } else {
-    //вправо
-    counter.value--;
-    if((Number(counter.value) - 2) > Number(counter.min)){
-      number = Number(counter.value) - 2;
+      leftHiddenFoto.remove();
+      leftFoto.classList.remove('item__left-secondary-foto');
+      leftFoto.classList.add('item__left-hidden-foto');
+      mainFoto.classList.remove('item__main-foto');
+      mainFoto.classList.add('item__left-secondary-foto');
+      rightFoto.classList.remove('item__right-secondary-foto');
+      rightFoto.classList.add('item__main-foto');
+      rightHiddenFoto.classList.remove('item__right-hidden-foto');
+      rightHiddenFoto.classList.add('item__right-secondary-foto');
+      rightHiddenFoto.insertAdjacentHTML("afterend", "<img class='item__foto item__right-hidden-foto' src='" + filePath + number + ".jpg' alt='Foto'>");
     } else {
-      number = Number(counter.value) - 2 + Number(counter.max);
-      if(Number(counter.value) === Number(counter.min)){
-        counter.value = counter.max;
+      //вправо
+      counter.value--;
+      if ((Number(counter.value) - 2) > Number(counter.min)) {
+        number = Number(counter.value) - 2;
+      } else {
+        number = Number(counter.value) - 2 + Number(counter.max);
+        if (Number(counter.value) === Number(counter.min)) {
+          counter.value = counter.max;
+        }
       }
+      rightHiddenFoto.remove();
+      rightFoto.classList.remove('item__right-secondary-foto');
+      rightFoto.classList.add('item__right-hidden-foto');
+      mainFoto.classList.remove('item__main-foto');
+      mainFoto.classList.add('item__right-secondary-foto');
+      leftFoto.classList.remove('item__left-secondary-foto');
+      leftFoto.classList.add('item__main-foto');
+      leftHiddenFoto.classList.remove('item__left-hidden-foto');
+      leftHiddenFoto.classList.add('item__left-secondary-foto');
+      leftHiddenFoto.insertAdjacentHTML("beforebegin", "<img class='item__foto item__left-hidden-foto' src='" + filePath + number + ".jpg' alt='Foto'>");
     }
-    rightHiddenFoto.remove();
-    rightFoto.classList.remove('item__right-secondary-foto');
-    rightFoto.classList.add('item__right-hidden-foto');
-    mainFoto.classList.remove('item__main-foto');
-    mainFoto.classList.add('item__right-secondary-foto');
-    leftFoto.classList.remove('item__left-secondary-foto');
-    leftFoto.classList.add('item__main-foto');
-    leftHiddenFoto.classList.remove('item__left-hidden-foto');
-    leftHiddenFoto.classList.add('item__left-secondary-foto');
-    leftHiddenFoto.insertAdjacentHTML("beforebegin", "<img class='item__foto item__left-hidden-foto' src='" + filePath + number + ".jpg' alt='Foto'>");
   }
+}
+
+function endTransition(){
+  timerSlide = true;
+}
+
+function parseTime(timeCss){
+  return parseInt(timeCss.substring(0, timeCss.length - 1));
 }
