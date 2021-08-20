@@ -114,11 +114,12 @@ h2 {
   font-size: 15px;
   padding: 15px;
 
-  transition: transform 0.3s linear;
+  transition: 0.3s linear;
 }
 
 .slider-container .controls button:hover {
-  background-color: #222222;
+  background-color: #BDB76B;
+  border: 1px solid #000000;
 }
 
 .slider-container.controls button:focus {
@@ -162,6 +163,9 @@ h2 {
   top: 0%;
   left:20%;
 
+  border: 8px transparent;
+  border-radius: 10px;
+
   transition: var(--foto__time-animation) linear;
 }
 
@@ -172,6 +176,9 @@ h2 {
   width: 20%;
   top: 40%;
   left: 0%;
+
+  border: 8px transparent;
+  border-radius: 10px;
 
   transition: var(--foto__time-animation) linear;
 }
@@ -184,6 +191,9 @@ h2 {
   top: 40%;
   left: 80%;
 
+  border: 8px transparent;
+  border-radius: 10px;
+
   transition: var(--foto__time-animation) linear;
 }
 
@@ -194,6 +204,9 @@ h2 {
   width: 20%;
   top: 40%;
   left: 0%;
+
+  border: 8px transparent;
+  border-radius: 10px;
 
   transition: var(--foto__time-animation) linear;
 }
@@ -206,6 +219,9 @@ h2 {
   top: 40%;
   left: 80%;
   
+  border: 8px transparent;
+  border-radius: 10px;
+
   transition: var(--foto__time-animation) linear;
 }
 

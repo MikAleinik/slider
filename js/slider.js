@@ -32,7 +32,9 @@ container.addEventListener('wheel', (event) => {
   if (thisTransition) {
     event = event || window.event;
     var y = event.deltaY || event.detail || event.wheelDelta;
-    if (event.target.className === 'item__foto item__main-foto') {
+    if (event.target.className === 'item__foto item__main-foto' || 
+        event.target.className === 'item__foto item__right-secondary-foto' ||
+        event.target.className === 'item__foto item__left-secondary-foto') {
       scrollFoto(y, event.target);
     } else {
       if (y < 0) {
